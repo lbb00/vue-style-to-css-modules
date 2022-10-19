@@ -1,0 +1,24 @@
+{
+  "name": "vue-style-to-css-modules",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "glob": "^8.0.3",
+    "gogocode": "^1.0.55",
+    "node-sass": "^7.0.3",
+    "postcss": "^8.4.18"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "rollup": "^3.2.3"
+  }
+}

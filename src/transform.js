@@ -13,9 +13,11 @@ export default function transform(code, id) {
       language: 'vue',
     },
   })
-  console.log(ast.rootNode.node.styles[0].attrs.module)
 
-  if (ast.rootNode.node.styles[0].attrs.module) {
+  if (
+    !ast.rootNode.node.styles[0] ||
+    ast.rootNode.node.styles[0].attrs.module
+  ) {
     return
   }
 

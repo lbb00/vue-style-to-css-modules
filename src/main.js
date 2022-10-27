@@ -15,5 +15,8 @@ if (!file) {
 }
 
 glob.sync(file).forEach((f) => {
-  fs.writeFileSync(f, transform(fs.readFileSync(f, 'utf-8').toString()))
+  const result = transform(fs.readFileSync(f, 'utf-8').toString(), f)
+  if (result) {
+    fs.writeFileSync(f, result)
+  }
 })

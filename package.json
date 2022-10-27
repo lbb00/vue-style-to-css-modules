@@ -1,24 +1,31 @@
 {
   "name": "vue-style-to-css-modules",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "src/main.js",
   "scripts": {
     "build": "rollup -c"
   },
+  "bin": {
+    "vue-style-to-css-modules": "./bin/main.js"
+  },
   "files": [
-    "dist"
+    "src",
+    "bin"
   ],
   "license": "ISC",
   "dependencies": {
+    "chalk": "4",
     "commander": "^9.4.1",
     "glob": "^8.0.3",
     "gogocode": "^1.0.55",
     "node-sass": "^7.0.3",
+    "node-sass-alias-importer": "^2.0.0",
     "postcss": "^8.4.18"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
-    "rollup": "^3.2.3"
+    "rollup": "^3.2.3",
+    "rollup-plugin-banner2": "^1.2.2"
   }
 }

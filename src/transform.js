@@ -1,18 +1,31 @@
 import $ from 'gogocode'
 import postcss from 'postcss'
 import scss from 'node-sass'
+import aliasImporter from 'node-sass-alias-importer'
+import chalk from 'chalk'
 
-export default function transform(code) {
+export default function transform(code, id) {
+  if (!id || !id.endsWith('.vue')) {
+    return
+  }
   const ast = $(code, {
     parseOptions: {
       language: 'vue',
     },
   })
+  console.log(ast.rootNode.node.styles[0].attrs.module)
+
+  if (ast.rootNode.node.styles[0].attrs.module) {
+    return
+  }
 
   const cssAst = postcss.parse(
     scss
       .renderSync({
         data: ast.rootNode.node.styles[0].content,
+        importer: aliasImporter({
+          '@': 'src',
+        }),
       })
       .css.toString()
   )
@@ -92,9 +105,28 @@ export default function transform(code) {
             i.key.content = ':class'
           }
         })
-        item.match[1][0].node.content = newContentAst.generate().replace(/"/g, "'")
+        item.match[1][0].node.content = newContentAst
+          .generate()
+          .replace(/"/g, "'")
       }
     })
+
+  let scriptAst = ast.find('<script></script>')
+  if (scriptAst.length === 0) {
+    scriptAst = ast.find('<script setup></script>')
+  }
+
+  scriptAst.find(`"$_$"`).each((i) => {
+    const str = i.match[0][0].value
+    if (classNames.includes(str)) {
+      const info = `[vue-style-to-css-modules: ${id}] ${chalk.yellow(
+        `class name ${`"${chalk.red(
+          str
+        )}"`} may be use in script, please check it manually`
+      )}`
+      console.log(info)
+    }
+  })
 
   ast.rootNode.node.styles[0].content = cssAst.toString()
   ast.rootNode.node.styles[0].attrs.module = true

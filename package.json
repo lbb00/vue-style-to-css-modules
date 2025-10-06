@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "4",
-    "commander": "^9.4.1",
+    "commander": "^9.5.0",
     "glob": "^9.0.0",
     "gogocode": "^1.0.55",
     "node-sass": "^8.0.0",

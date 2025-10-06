@@ -17,7 +17,7 @@
   "dependencies": {
     "chalk": "4",
     "commander": "^9.4.1",
-    "glob": "^9.0.0",
+    "glob": "^8.1.0",
     "gogocode": "^1.0.55",
     "node-sass": "^8.0.0",
     "node-sass-alias-importer": "^2.0.0",
